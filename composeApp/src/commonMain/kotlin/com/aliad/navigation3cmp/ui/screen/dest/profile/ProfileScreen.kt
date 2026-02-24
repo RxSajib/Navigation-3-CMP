@@ -1,8 +1,7 @@
-package com.aliad.navigation3cmp.ui.screen.note
+package com.aliad.navigation3cmp.ui.screen.dest.profile
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -10,11 +9,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun NoteDetailsScreen(){
+fun ProfileScreen(){
     Scaffold { innerPadding ->
-        Box(modifier = Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center){
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
             Text(
-                text = "This is note details"
+                text = "Profile Screen"
             )
         }
     }

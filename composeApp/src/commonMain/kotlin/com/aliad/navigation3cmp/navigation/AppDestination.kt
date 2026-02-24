@@ -24,5 +24,25 @@ sealed class AppDestination : NavKey {
 
         @Serializable
         data object Details : AppDestination()
+
+        @Serializable
+        data object NoteSetting : AppDestination()
+
+        @Serializable
+        data object SaveNote : AppDestination()
     }
+
+
+    @Serializable
+    data class Dest(
+        val firstElement : String
+    ) : AppDestination(){
+
+        @Serializable
+        data class NoteDetails(val destId : Int) : AppDestination()
+
+        @Serializable
+        data object Profile : AppDestination()
+    }
+
 }

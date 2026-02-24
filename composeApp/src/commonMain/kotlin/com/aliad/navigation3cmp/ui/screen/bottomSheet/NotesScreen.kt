@@ -1,4 +1,4 @@
-package com.aliad.navigation3cmp.ui.screen.note
+package com.aliad.navigation3cmp.ui.screen.bottomSheet
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,11 +14,11 @@ import androidx.navigation3.runtime.NavKey
 import com.aliad.navigation3cmp.navigation.AppDestination
 
 @Composable
-fun NotesScreen(appBackStack: NavBackStack<NavKey>) {
+fun NotesScreen(rootBackStack: NavBackStack<NavKey>) {
     Scaffold { innerPadding ->
         Box(modifier = Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center){
             Button(onClick = {
-                appBackStack.add(AppDestination.Note.Details)
+                rootBackStack.add(AppDestination.Dest("note details"))
             }){
                 Text(
                     text = "Goto Note Details"

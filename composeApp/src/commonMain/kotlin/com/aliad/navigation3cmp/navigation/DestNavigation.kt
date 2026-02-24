@@ -8,42 +8,45 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
+import com.aliad.navigation3cmp.ui.screen.bottomSheet.NoteDetailsScreen
+import com.aliad.navigation3cmp.ui.screen.dest.profile.ProfileScreen
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlin.collections.listOf
 
 @Composable
-fun RootNavigation() {
+fun DestNavigation(firstDest: AppDestination.Dest) {
 
     val appConfig = SavedStateConfiguration {
         serializersModule = SerializersModule {
             polymorphic(NavKey::class) {
-                subclass(AppDestination.Auth::class, AppDestination.Auth.serializer())
-                subclass(AppDestination.Note::class, AppDestination.Note.serializer())
-                subclass(AppDestination.Dest::class, AppDestination.Dest.serializer())
+                subclass(AppDestination.Dest.NoteDetails::class, AppDestination.Dest.NoteDetails.serializer())
+                subclass(AppDestination.Dest.Profile::class, AppDestination.Dest.Profile.serializer())
             }
         }
     }
 
-    val navBackStack = rememberNavBackStack(configuration = appConfig, AppDestination.Auth)
+    val firstDest = when{
+        firstDest.firstElement == "note details" -> AppDestination.Dest.NoteDetails(destId = 0)
+        firstDest.firstElement == "profile screen" -> AppDestination.Dest.Profile
+        else -> throw Exception("Invalid destination")
+    }
+
+    val backStack = rememberNavBackStack(configuration = appConfig, firstDest)
 
     NavDisplay(
-        backStack = navBackStack,
+        backStack = backStack,
         entryDecorators = listOf(
             rememberSaveableStateHolderNavEntryDecorator(),
             rememberViewModelStoreNavEntryDecorator()
         ),
         entryProvider = entryProvider {
-            entry<AppDestination.Auth> {
-                AuthNavigation(rootBackStack = navBackStack)
+            entry<AppDestination.Dest.NoteDetails> {details ->
+                NoteDetailsScreen(details)
             }
-            entry<AppDestination.Note> {
-                NoteNavigation(rootBackStack = navBackStack)
-            }
-            entry<AppDestination.Dest> {firstDest ->
-                DestNavigation(firstDest)
+            entry<AppDestination.Dest.Profile> {
+                ProfileScreen()
             }
         }
     )
-
 }
