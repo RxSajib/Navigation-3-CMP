@@ -1,6 +1,7 @@
 package com.aliad.navigation3cmp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -13,7 +14,9 @@ import com.aliad.navigation3cmp.ui.screen.dest.profile.ProfileScreen
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlin.collections.listOf
+import kotlin.math.log
 
+private const val TAG = "DestNavigation"
 @Composable
 fun DestNavigation(firstDest: AppDestination.Dest) {
 
@@ -26,9 +29,10 @@ fun DestNavigation(firstDest: AppDestination.Dest) {
         }
     }
 
+
     val firstDest = when{
-        firstDest.firstElement == "note details" -> AppDestination.Dest.NoteDetails(destId = 0)
-        firstDest.firstElement == "profile screen" -> AppDestination.Dest.Profile
+        firstDest.noteDetails == AppDestination.Dest.NoteDetails::class.simpleName -> AppDestination.Dest.NoteDetails(destId = 0)
+        firstDest.noteDetails == AppDestination.Dest.Profile::class.simpleName -> AppDestination.Dest.Profile
         else -> throw Exception("Invalid destination")
     }
 

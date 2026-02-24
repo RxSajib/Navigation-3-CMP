@@ -34,9 +34,7 @@ sealed class AppDestination : NavKey {
 
 
     @Serializable
-    data class Dest(
-        val firstElement : String
-    ) : AppDestination(){
+    data class Dest(val noteDetails: String) : AppDestination(){
 
         @Serializable
         data class NoteDetails(val destId : Int) : AppDestination()

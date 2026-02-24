@@ -1,7 +1,6 @@
 package com.aliad.navigation3cmp.ui.screen.bottomSheet
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,7 +27,7 @@ fun NoteSettingScreen(rootBackStack: NavBackStack<NavKey>) {
         ) {
 
             Button(onClick = {
-                rootBackStack.add(AppDestination.Dest("profile screen"))
+                rootBackStack.add(AppDestination.Dest(AppDestination.Dest.Profile::class.simpleName?: ""))
             }) {
                 Text("Profile")
             }

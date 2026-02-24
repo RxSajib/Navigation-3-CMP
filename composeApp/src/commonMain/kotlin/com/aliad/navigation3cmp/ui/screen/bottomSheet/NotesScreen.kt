@@ -15,10 +15,11 @@ import com.aliad.navigation3cmp.navigation.AppDestination
 
 @Composable
 fun NotesScreen(rootBackStack: NavBackStack<NavKey>) {
+    val x = AppDestination.Dest.NoteDetails::class.simpleName
     Scaffold { innerPadding ->
         Box(modifier = Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center){
             Button(onClick = {
-                rootBackStack.add(AppDestination.Dest("note details"))
+                rootBackStack.add(AppDestination.Dest(x?: ""))
             }){
                 Text(
                     text = "Goto Note Details"
